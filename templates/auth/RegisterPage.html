@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <form action="{% url 'user:registration' %}" class='login-form' method="post">
+        <span class="logo">Регистрация</span>
+        <br>
+        {% csrf_token %}
+        {% if form.username.errors %}
+            <span class='lower-text error-text'>Имя пользователя занято или грешно</span>
+        {% endif %}
+        {{ form.username }}
+        {{ form.email }}
+        {{ form.password1 }}
+        {{ form.password2 }}
+
+        {% if form.password2.errors %}
+            <span class='lower-text error-text'>{{form.password2.errors}}</span>
+        {% endif %}
+
+        <span class="lower-text gray">Внимание! Души, забывшие пароль, до рая допущены не будут! </span>
+        <button type="submit" class="button1">Совершить регистрацию</button>
+        <a class='lower-text clickable' href="{% url 'user:login' %}">Войти</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class='hero'>
+            <img src='{% static "prikoli/img/BigCross.png" %}' alt='Cross'>
+            <a class='hero-text'>Забронируй место в первых рядах!</a>
+        </div>
+        <form class='action-part' action="{% url 'user:bless' %}" method="post">
+            {% csrf_token %}
+            <a class='advert'>Осталось мест: <span class='counter'>{{ bless_counter }}</span></a>
+            <p></p>
+            {% if not user.is_authenticated %}
+                <a class='button1' href="{% url 'user:login' %}">Войдите, чтобы забронировать</a>
+            {% else %}
+                {% if not is_blessed %}
+                    {% if bless_counter > 0 %}
+                        <button class='button1' type="submit">Забронировать место в раю</button>
+                    {% else %}
+                        <a class='button1 booked-button'>Мест не осталось</a>
+                    {% endif %}
+                {% else %}
+                <a class="blessed-text">Вы успешно благословлены</a>
+                    <button class='button1 booked-button' type="submit">Освободить место в раю</button>
+                {% endif %}
+            {% endif %}
+            <a class='advert'>Уже забронировали:</a>
+            <div class='member-list'>
+                {% for user in blessed_users %}
+                    <a class='member'>{{ user.username }}</a>
+                {% endfor %}
+            </div>
+        </form>
+{% endblock %}

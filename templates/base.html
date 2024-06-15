@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'prikoli/styles.css' %}" >
+    <link rel="icon" href="{% static 'prikoli/img/favicon.png' %}">
+</head>
+<body>
+    <header>
+        <a class='logo' href="{% url 'main:index' %}">Embrace God</a>
+        <div class='right-header'>
+            {% if not user.is_authenticated %}
+                <a class='log-in' href="{% url 'main:about' %}">Об авторе</a>
+                <a class='log-in' href="{% url 'user:registration' %}">Зарегистрироваться</a>
+                <a class='log-in' href="{% url 'user:login' %}">Войти</a>
+            {% else %}
+                <a class='log-in clickable'> {{ username }} </a>
+                <a class='log-in' href="{% url 'main:about' %}">Об авторах</a>
+                <a class='log-in' href="{% url 'user:logout' %}">Выйти</a>
+            {% endif %}
+        </div>
+    </header>
+    <main>
+        {% block content%}
+        {% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <form action="{% url 'user:login' %}" class='login-form' method="post">
+        <span class="logo">Вход</span>
+        <br>
+        {% csrf_token %}
+        {{ form.username }}
+        {{ form.password }}
+        {% if form.non_field_errors %}
+            <span class='lower-text error-text'>Ошибка! логин или пароль не соответствуют реальности бытия</span>
+        {% endif %}
+        <button type="submit" class="button1">Войти</button>
+        <a class='lower-text clickable' href="{% url 'user:registration' %}">Зарегистрироваться</a>
+    </form>
+{% endblock %}
