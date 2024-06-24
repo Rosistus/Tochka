@@ -138,6 +138,12 @@ main {
     width: 70%;
 }
 
+.input2 {
+    margin: 0px 0px;
+    padding: 10px 10px;
+    width: 300px;
+}
+
 .counter {
 
 }
