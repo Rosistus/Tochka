@@ -5,6 +5,13 @@
             <img src='{% static "prikoli/img/BigCross.png" %}' alt='Cross'>
             <a class='hero-text'>Забронируй место в первых рядах!</a>
         </div>
+        {% if user.is_superuser %}
+            <form action="{% url 'main:change_limit' %}" class='login-form' method="post">
+                {% csrf_token %}
+                {{ form.limit }}
+                <button type="submit" class="button1">Изменить</button>
+            </form>
+        {% endif %}
         <form class='action-part' action="{% url 'user:bless' %}" method="post">
             {% csrf_token %}
             <a class='advert'>Осталось мест: <span class='counter'>{{ bless_counter }}</span></a>
