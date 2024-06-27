@@ -86,11 +86,16 @@ WSGI_APPLICATION = 'tochka.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+      'default': {
+          'ENGINE': 'django.db.backends.mysql',
+          'NAME': 'Rosistus$default',
+          'USER': 'Rosistus',
+          'PASSWORD': '###',
+          'HOST': 'Rosistus.mysql.pythonanywhere-services.com',
+          'PORT': '3306',
+          'OPTIONS': { 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'" }
+      }
+  }
 
 
 # Password validation
@@ -142,12 +147,11 @@ INTERNAL_IPS = [
 
 AUTH_USER_MODEL = 'users.User'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_HOST_USER = 'Jesuswannatalktoyou@yandex.ru'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'jesuswannatalktoyou@gmail.com'
 EMAIL_HOST_PASSWORD = '###'
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
